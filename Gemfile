@@ -16,6 +16,7 @@ group :test do
   # User rspec for testing
   gem 'rspec-rails'
   gem 'capybara', '2.2.1'
+  gem 'factory_girl_rails', '1.4.0'
 end
 
 # Gems used only for assets and not required in production environment by default.
