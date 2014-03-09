@@ -5,15 +5,12 @@ gem 'rails', '4.0.2'
 gem 'bootstrap-sass', '2.0.0'
 # Use ActiveModel has_secure_password
 gem 'bcrypt-ruby'
+# user sqlite during development
+gem 'sqlite3'
 
 # Use sqlite3 as the database for Active Record
-group :development do
-  gem 'sqlite3'
+group :development, :test do
   gem 'annotate', '~> 2.4.1.beta'
-end
-
-group :test do
-  # User rspec for testing
   gem 'rspec-rails'
   gem 'capybara', '2.2.1'
   gem 'factory_girl_rails', '1.4.0'
@@ -26,9 +23,12 @@ group :assets do
   gem 'uglifier', '>= 1.3.0'
 end
 
+#group :production do
+#  gem 'pg', '0.12.2'
+#end
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
-
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
