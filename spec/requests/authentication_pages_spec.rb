@@ -10,7 +10,6 @@ describe "Authentication" do
     it { should have_selector('h1', text: 'Sign in') }
     it { should have_selector('title', text: 'Sign in', visible: false) }
   end
-
   describe "signin" do
     before { visit signin_path }
 
@@ -42,7 +41,6 @@ describe "Authentication" do
       end
     end
   end
-
   describe "authorization" do
 
     describe "for non-signed-in users" do
@@ -74,6 +72,11 @@ describe "Authentication" do
           before { put user_path(user) } #could use patch instead of put
           specify { response.should redirect_to(signin_path) }
         end
+
+        describe "visiting the user index" do
+          before { visit users_path }
+          it { should have_title('Sign in') }
+        end
       end
     end
 
@@ -92,5 +95,18 @@ describe "Authentication" do
         specify { response.should redirect_to(root_path) }
       end
     end
+  end
+  describe "with valid information" do
+    let(:user) { FactoryGirl.create(:user) }
+    before { sign_in user }
+
+    it { should have_title(user.name) }
+
+    it { should have_link('Users', href: users_path) }
+    it { should have_link('Profile', href: user_path(user)) }
+    it { should have_link('Settings', href: edit_user_path(user)) }
+    it { should have_link('Sign out', href:signout_path ) }
+
+    it { should_not have_link('Sign in', href: signin_path) }
   end
 end
